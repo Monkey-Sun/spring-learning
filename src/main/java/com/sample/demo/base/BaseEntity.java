@@ -6,7 +6,10 @@ import org.hibernate.annotations.UpdateTimestamp;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
-
+/**
+ * 实体基类:
+ * 子类继承即可获得创建时间和更新时间
+ * */
 @MappedSuperclass
 public class BaseEntity implements Serializable {
     @Column(name = "creat_time")
