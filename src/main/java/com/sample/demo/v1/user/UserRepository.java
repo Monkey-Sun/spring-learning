@@ -9,8 +9,7 @@ import java.util.Collection;
 
 public interface UserRepository extends CrudRepository<User, Integer> {
 
-    @Query("SELECT DISTINCT user FROM User user WHERE user.phoneNum LIKE :phoneNum%")
+    @Query("SELECT DISTINCT user FROM User user WHERE user.phoneNum = phoneNum")
     @Transactional(readOnly = true)
     User findUserByPhone(@Param("phoneNum") String phoneNum);
-
 }

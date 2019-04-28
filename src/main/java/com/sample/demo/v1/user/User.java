@@ -1,19 +1,27 @@
 package com.sample.demo.v1.user;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
 import javax.persistence.*;
 import java.util.Date;
 
 @Entity
+//  加unique约束 没用，除非数据库是 hibernate 自己创建的，所以还是自己去数据库端检查
+@Table(name="user",
+//        uniqueConstraints={@UniqueConstraint(columnNames="phone_num")},
+        indexes = {@Index(columnList = "user_id, phone_num, creat_time, update_time")}
+)
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
     private Integer userId;
 
     @Column(name = "nick_name")
     public String nickName;
 
-    @Column(name = "phone_num")
+    @Column(name = "phone_num", length = 20)
     public String phoneNum;
 
     @Column(name = "pass_word")
@@ -22,6 +30,16 @@ public class User {
     public String avatar;
 
     public Integer sex;
+
+    @Column(name = "creat_time")
+    @CreationTimestamp
+    public Date createTime;
+
+    @Column(name = "update_time")
+    @UpdateTimestamp
+    public Date updateTime;
+
+    public String platform;
 
     public void setUserId(Integer userId) {
         this.userId = userId;
@@ -69,5 +87,29 @@ public class User {
 
     public Integer getSex() {
         return sex;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
+    }
+
+    public Date getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setPlatform(String platform) {
+        this.platform = platform;
+    }
+
+    public String getPlatform() {
+        return platform;
     }
 }
