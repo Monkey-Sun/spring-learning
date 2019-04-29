@@ -1,0 +1,24 @@
+spring:
+  application:
+    name: sun_service
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+
+    database: mysql
+#    使用InnoDB
+    database-platform: org.hibernate.dialect.MySQL57Dialect
+  datasource:
+    url: jdbc:mysql://localhost:3306/sun_service
+    username: root
+    password: 123456789
+
+  cloud:
+    consul:
+      host: localhost
+      port: 8500
+
+
+
+
