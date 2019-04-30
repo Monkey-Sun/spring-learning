@@ -2,11 +2,14 @@ package com.sample.demo.v1.user;
 
 import com.sample.demo.ClientReseponseEntity;
 import com.sample.demo.ErrorCode;
+import com.sample.demo.utils.CookieUtils;
 import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.Cookie;
 import java.util.Optional;
 
 @Controller
@@ -47,12 +50,17 @@ public class UserController {
     }
 
     @GetMapping(path="/user/finduser")
-    public @ResponseBody ClientReseponseEntity getUser(@RequestParam String userId, @RequestHeader HttpHeaders headers) {
+    public @ResponseBody ClientReseponseEntity getUser(@RequestParam String userId, @RequestHeader HttpHeaders headers, @CookieValue(value = "sessionId", required = false) String token) {
         ClientReseponseEntity replayEntity = new ClientReseponseEntity();
         replayEntity.res = userRepository.findById(Integer.parseInt(userId));
         replayEntity.setCode(ErrorCode.success);
         if (replayEntity.res == Optional.empty()){
             replayEntity.setCode(ErrorCode.notfound);
+        }
+        if (token == null) {
+            Cookie cookie = new Cookie("sessionId","sessionId111111");
+            cookie.setMaxAge(3600);
+            CookieUtils.saveCookie(cookie);
         }
         return replayEntity;
     }

@@ -85,4 +85,14 @@ public class User extends BaseEntity {
     public String getPlatform() {
         return platform;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        return super.equals(obj);
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
 }
