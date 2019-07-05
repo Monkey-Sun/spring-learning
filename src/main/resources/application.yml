@@ -10,14 +10,14 @@ spring:
 #    使用InnoDB
     database-platform: org.hibernate.dialect.MySQL57Dialect
   datasource:
-    url: jdbc:mysql://localhost:3306/sun_service
+    url: jdbc:mysql://49.234.22.26:3306/sjx?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC
     username: root
-    password: 123456789
+    password: sjx123
 
-  cloud:
-    consul:
-      host: localhost
-      port: 8500
+#  cloud:
+#    consul:
+#      host: localhost
+#      port: 8500
 
 
 
